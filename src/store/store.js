@@ -1,3 +1,4 @@
+import { filter } from "@/helpers/filter";
 import { createStore } from "vuex";
 
 const dataArray =[
@@ -279,86 +280,11 @@ export const store = createStore({
         },
 
         setOut(state) {
-            console.log(state.value.length)
             if (state.value.length === 0) {
                 state.outData = state.allData.slice(state.activePage * state.limit, state.activePage * state.limit + state.limit)
                 state.pages  = Math.ceil(state.allData.length / state.limit)
             } else {
-                const out = []
-
-                if (state.filter == "name") {
-                    state.allData.forEach(el => {
-                        if (el.name.includes(state.value)) {
-                            out.push(el)
-                        }
-                    })
-                }
-                else if (state.filter == "amount" && +state.value) {
-                    switch (state.type) {
-                        case "larger": {
-                            state.allData.forEach(el => {
-                                if (el.amount > +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            break;
-                        }
-                        case "less": {
-                            state.allData.forEach(el => {
-                                if (el.amount < +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            
-                            break;
-                        }
-                        case "equal": {
-                            state.allData.forEach(el => {
-                                if (el.amount === +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            
-                            break;
-                        }
-                    }
-                }
-                else if (state.filter == "distance"  && +state.value) {
-                    switch (state.type) {
-                        case "larger": {
-                            state.allData.forEach(el => {
-                                if (el.distance > +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            break;
-                        }
-                        case "less": {
-                            state.allData.forEach(el => {
-                                if (el.distance < +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            
-                            break;
-                        }
-                        case "equal": {
-                            state.allData.forEach(el => {
-                                if (el.distance === +state.value) {
-                                    out.push(el)
-                                }
-                            })
-                            
-                            break;
-                        }
-                    }
-                }
-                else {
-                    alert('Что-то пошло не так')
-                }
-
-                state.pages  = Math.ceil(out.length / state.limit)
-                state.outData = out.slice(state.activePage * state.limit, state.activePage * state.limit + state.limit)
+                filter(this.state)
             }
         },
 
@@ -371,7 +297,8 @@ export const store = createStore({
                         name: "Содержит",
                         filter: "include"
                     }
-                ]
+                ],
+                state.type = "include"
             } else {
                 state.value = ""
                 state.type = "equal"
@@ -390,10 +317,12 @@ export const store = createStore({
                     }
                 ]
             }
+            state.activePage = 0
         },
 
         setType(state, type) {
             state.type = type
+            state.activePage = 0
             this.commit('setOut')
         },
 

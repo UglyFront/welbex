@@ -19,17 +19,32 @@
 
 <script>
 import TableRow from "./Row.vue"
-    export default {
-        name: "RootTable",
-        components: {
-            TableRow
-        },
 
-        computed: {
-            outData() {
-                console.log(this.$store.state.outData)
-                return this.$store.state.outData
-            }
+export default {
+    name: "RootTable",
+    components: {
+        TableRow
+    }
+}
+</script>
+
+<style lang="scss">
+.table {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: rgb(194, 194, 194);
+    
+    tr {
+        width: 100%;
+        height: 30px;
+
+
+        td {
+            height: 100%;
+            background: rgb(141, 141, 141);
+            padding: 5px;
         }
     }
-</script>
+}
+</style>

@@ -17,3 +17,14 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.controlls {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>

@@ -1,6 +1,8 @@
 <template>
-    <select name="" id="" @change="changeHandler">
-        <option v-for="option in options" :key="option.filter" :value="option.filter">{{option.name}}</option>
+    <select name="" id="" @change="changeHandler" :value="filter ? $store.state.filter: $store.state.type">
+        <option v-for="option in options" 
+        :key="option.filter" 
+        :value="option.filter">{{option.name}}</option>
     </select>
 </template>
 

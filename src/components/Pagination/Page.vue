@@ -1,6 +1,6 @@
 <template>
     <div 
-        :class="num-1 === $store.state.activePage ? 'pagination__page-active' : 'pagination__page'"
+        :class="num-1 === $store.state.activePage ? 'pagination__page_active' : 'pagination__page'"
         @click="$store.commit('setActivePage', num)"
     >
         {{num}}

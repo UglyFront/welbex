@@ -49,3 +49,16 @@ export default {
 }
 </script>
 
+<style lang="scss">
+#app {
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.content {
+    max-width: 1000px;
+    height: 100%;
+    margin-top: 15px;
+}
+</style>
